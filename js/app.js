@@ -3,7 +3,7 @@
  */
 var angular = angular.module("ducksound", ['ngMaterial']);
 angular.controller('ctrl', function ($scope, $http, $mdDialog, $location) {
-    var base_url = "http://192.168.3.2/ducksound/";
+    var base_url = "https://ducksound.tk/";
     var email = "contact@ducksound.tk";
     $scope.client_id = "da2849d8ad5fea67366e4da7444f0152";
     $scope.object = [];
