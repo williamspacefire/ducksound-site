@@ -1,0 +1,75 @@
+<html lang="pt-br" ng-app="ducksound" ng-controller="ctrl">
+<head>
+    <title>Procure, ouça e baixe musicas - Ducksound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="shortcut icon" href="https://2.bp.blogspot.com/--Ro_XyJVF0Q/VeX0JVkuokI/AAAAAAAAAik/ELxflDg0cok/s1600/play.png"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+
+<div ng-if="loading" class="loading">
+    <md-progress-circular></md-progress-circular>
+    <br><center>Carregando...</center>
+</div>
+
+<md-content class="content" ng-if="!loading">
+    <center>
+    <div class="home_search">
+        <div class="search_box">
+            <div class="title">
+                Ducksound
+            </div>
+            <md-card>
+                <form enctype="multipart/form-data" method="get" id="searchForm">
+                    <input id="query" ng-model="q" autocomplete="off" type="search" placeholder="Procure por Artista, Musica ou Banda" name="q">
+                    <md-button ng-disabled="!q" ng-click="query(q)" class="md-icon-button"><md-icon md-svg-src="img/search.svg"></md-icon></md-button>
+                </form>
+            </md-card>
+        </div>
+    </div>
+        <md-progress-linear ng-if="progress"></md-progress-linear>
+    </center>
+    <div class="by">Powered by <a target="_blank" href="https://meycup.tk">Meycup</a></div><br>
+    <div id="player"></div>
+    <md-card ng-repeat="music in result">
+        <md-card-title>
+            <md-card-title-text>
+                <a target="_blank" href="{{music.permalink_url}}"><span class="md-headline">{{music.title}}</span></a>
+                <span class="md-subhead">
+                    Enviado por:
+                    <a href="{{music.user.permalink_url}}" target="_blank">
+                        {{music.user.username}}
+                    </a>
+                    <br>
+                    Duraçao: {{music.duration}}
+                </span>
+            </md-card-title-text>
+            <md-card-title-media>
+                <div class="md-media-sm card-media">
+                    <img src="{{(music.artwork_url) ? music.artwork_url : music.user.avatar_url}}">
+                </div>
+            </md-card-title-media>
+        </md-card-title>
+        <md-card-actions>
+            <md-button class="md-icon-button" ng-click="play(music)">
+                <md-icon>
+                    <img id="playbtn-{{music.id}}" src="img/play-circle.svg"/>
+                </md-icon>
+            </md-button>
+            <md-button target="_blanck" href='http://www.naphi.co/redirect/down.php?id={{music.uri}}/&name={{music.permalink}}_(Ducksound)'>
+                Download
+            </md-button>
+        </md-card-actions>
+    </md-card>
+
+</md-content>
+</body>
+</html>
