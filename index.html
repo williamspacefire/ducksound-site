@@ -54,7 +54,7 @@
             </md-card-title-text>
             <md-card-title-media>
                 <div class="md-media-sm card-media">
-                    <img src="{{(music.artwork_url) ? music.artwork_url : music.user.avatar_url}}">
+                    <img src="{{(music.artwork_url) ? music.artwork_url : music.user.avatar_url.replace('http','https')}}">
                 </div>
             </md-card-title-media>
         </md-card-title>
